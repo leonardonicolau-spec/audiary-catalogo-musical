@@ -1,74 +1,146 @@
-# Arquitetura de Software: Audiary
+Arquitetura de Software: Audiary
 
-## 1. Contexto Técnico
-Este documento detalha o design técnico da aplicação web Audiary. A aplicação operará como uma Single Page Application (SPA) baseada em consumo de dados de terceiros e uma camada de mock local para simular um banco de dados relacional sem a necessidade de um backend em nuvem nesta fase.
+1. Contexto Técnico
 
-## 2. Visão do Sistema (Diagrama de Componentes)
+O Audiary será desenvolvido como uma aplicação web responsiva voltada à catalogação e ao registro de experiências musicais.
 
-```mermaid
+A aplicação utilizará tecnologias de desenvolvimento front-end, uma API pública para obtenção de informações musicais e uma API fake para simular a persistência dos dados gerados pelos usuários.
+
+O armazenamento local do navegador também será utilizado para manter determinadas preferências e informações da sessão do usuário.
+
+2. Arquitetura do Sistema
+
 graph TD
-    Client[Interface Web: Audiary SPA] -->|Busca Metadados| MusicAPI[API Pública: Spotify API / Last.fm / MusicBrainz]
-    Client -->|Persistência do Diário| FakeAPI[API Fake: JSON Server / Mock Service Worker]
-    Client -->|Armazenamento Local| LocalStorage[(LocalStorage do Navegador)]
-```
+    Client[Interface Web: Audiary] -->|Consulta dados musicais| MusicAPI[API Pública de Música]
+    Client -->|Persistência de dados| FakeAPI[JSON Server]
+    Client -->|Preferências e sessão| LocalStorage[(LocalStorage)]
 
-## 3. Pilha Tecnológica (Tech Stack)
-* **Frontend Core:** HTML5, CSS3 e JavaScript (ES6+).
-* **Componentização / Framework (Opcional):** React.js ou Vue.js para manipulação reativa do DOM e estado da aplicação.
-* **Estilização:** CSS Custom Properties ou Tailwind CSS para uma interface moderna baseada em Grid e Flexbox com abordagem Mobile-First.
-* **API de Música Pública:** [Spotify Web API](https://spotify.com "Spotify Developer Portal") ou [Last.fm API](https://last.fm "Last.fm API") para obter metadados (capas de álbuns, faixas, artistas).
-* **API Fake/Mock:** [JSON-Server](https://github.com "JSON-Server GitHub") rodando localmente para simular rotas HTTP estruturadas (`/users`, `/reviews`, `/logs`).
-* **Validação:** JavaScript Nativo (Constraint Validation API) aplicada em todos os formulários.
+Componentes principais
 
-## 4. Estrutura de Dados (JSON / Entidades)
+- Interface Web: responsável pela apresentação das páginas e interação com o usuário.
+- API Pública de Música: fornece informações como artistas, álbuns, capas, gêneros e faixas.
+- JSON Server: simula uma API de backend para persistência dos dados do usuário.
+- LocalStorage: armazena informações locais, como preferências e dados de sessão.
 
-O banco de dados simulado (`db.json`) gerenciará as seguintes tabelas relacionais:
+3. Pilha Tecnológica
 
-### `users`
-```json
-{
-  "id": "user_10",
-  "username": "vinicius_music",
-  "email": "vinicius@audiary.com"
-}
-```
+- HTML5: estrutura das páginas.
+- CSS3: estilização e layouts personalizados.
+- Bootstrap: framework CSS utilizado para componentes e layouts responsivos.
+- Sass/SCSS: organização e modularização dos estilos.
+- JavaScript: lógica e interatividade da aplicação.
+- jQuery: manipulação do DOM e implementação de interações.
+- Node.js e NPM: gerenciamento de dependências e ferramentas do projeto.
+- JSON Server: API fake para persistência e consulta dos dados.
+- ESLint: análise estática e padronização do código JavaScript.
+- Prettier: formatação automática do código.
+- Git/GitHub: versionamento e gerenciamento do código-fonte.
+- API Pública de Música: fornecimento de informações sobre artistas e álbuns.
 
-### `logs` (O diário de audição)
-```json
-{
-  "id": "log_888",
-  "user_id": "user_10",
-  "album_id": "ext_id_404",
-  "album_name": "Abbey Road",
-  "artist_name": "The Beatles",
-  "cover_url": "https://link-da-imagem.com",
-  "listened_at": "2026-08-25",
-  "rating": 5,
-  "liked": true
-}
-```
+4. Modelo de Dados
 
-### `reviews` (Resenhas independentes ou vinculadas)
-```json
-{
-  "id": "rev_202",
-  "user_id": "user_10",
-  "album_id": "ext_id_404",
-  "review_text": "Uma obra impecável do início ao fim. O lado B do vinil é histórico.",
-  "created_at": "2026-08-25T18:00:00Z"
-}
-```
+O Audiary utilizará uma estrutura de dados baseada nas principais entidades necessárias para o funcionamento da aplicação.
 
-## 5. Decisões Arquiteturais (ADRs)
+erDiagram
 
-* **Uso de uma API Fake + Armazenamento Local:**
-  * **Justificativa:** Reduzir a fricção de infraestrutura no MVP. Permite que o foco do projeto se concentre puramente na lógica de front-end, design de interface responsivo e consumo assíncrono de APIs externas.
-* **Uso de IDs Externos como Chave Estrangeira:**
-  * **Justificativa:** Ao salvar um log ou review, o Audiary armazena o ID retornado pela API de música pública (`album_id`). Isso evita duplicar dados pesados de metadados no banco de dados fake.
+    USUARIO ||--o{ REGISTRO_AUDICAO : possui
+    USUARIO ||--o{ RESENHA : escreve
+    USUARIO ||--o{ LISTA_DESEJOS : possui
 
-## 6. Fluxo de Integração com a API Pública
-1. O usuário digita um termo na barra de pesquisa do Audiary.
-2. O front-end dispara uma requisição assíncrona (`fetch`/`axios`) para a API escolhida.
-3. Os resultados retornados preenchem um grid de cards visuais.
-4. Ao clicar no card, o ID do álbum é capturado e injetado nos formulários de Log e Review para persistência local.
+    ALBUM ||--o{ REGISTRO_AUDICAO : possui
+    ALBUM ||--o{ RESENHA : recebe
+    ALBUM ||--o{ LISTA_DESEJOS : pertence
 
+    USUARIO {
+        string id PK
+        string username
+        string email
+    }
+
+    ALBUM {
+        string id PK
+        string titulo
+        string artista
+        string capa_url
+        string data_lancamento
+        string genero
+    }
+
+    REGISTRO_AUDICAO {
+        string id PK
+        string usuario_id FK
+        string album_id FK
+        date data_audicao
+        int nota
+        boolean favorito
+    }
+
+    RESENHA {
+        string id PK
+        string usuario_id FK
+        string album_id FK
+        string texto
+        datetime data_criacao
+    }
+
+    LISTA_DESEJOS {
+        string id PK
+        string usuario_id FK
+        string album_id FK
+        datetime data_adicao
+    }
+
+Descrição das Entidades
+
+USUARIO
+
+Representa os usuários da aplicação e armazena suas informações básicas de identificação.
+
+ALBUM
+
+Representa os álbuns catalogados pela aplicação. Os dados musicais poderão ser obtidos inicialmente por meio da API pública.
+
+REGISTRO_AUDICAO
+
+Representa o registro de um álbum ouvido pelo usuário, armazenando a data da audição, a avaliação e a informação de favorito.
+
+RESENHA
+
+Representa uma avaliação textual realizada pelo usuário sobre um álbum.
+
+LISTA_DESEJOS
+
+Representa os álbuns que o usuário deseja ouvir futuramente.
+
+5. Persistência de Dados
+
+Os dados serão divididos entre diferentes mecanismos de armazenamento de acordo com sua finalidade.
+
+API Fake
+
+O JSON Server será responsável pela persistência de dados relacionados à atividade do usuário, como:
+
+- Registros de audição;
+- Avaliações;
+- Resenhas;
+- Lista de desejos;
+- Dados básicos de usuários.
+
+LocalStorage
+
+O "localStorage" será utilizado para armazenar informações que precisam permanecer disponíveis no navegador, como preferências da interface e informações relacionadas à sessão.
+
+API Pública
+
+Informações como nome do álbum, artista, capa, gênero, data de lançamento e faixas serão obtidas dinamicamente por meio de uma API pública de música.
+
+6. Fluxo de Integração com a API Pública
+
+1. O usuário pesquisa um artista ou álbum na aplicação.
+2. O front-end realiza uma requisição assíncrona para a API pública.
+3. Os dados retornados são processados pela aplicação.
+4. Os resultados são exibidos em cards na interface.
+5. Ao selecionar um álbum, seus dados são utilizados para preencher a página de detalhes.
+6. O usuário pode registrar o álbum como ouvido, avaliá-lo, escrever uma resenha ou adicioná-lo à lista de desejos.
+7. Os dados gerados pelo usuário são enviados para a API fake.
+8. A aplicação trata possíveis erros durante as requisições e informa o usuário quando necessário.

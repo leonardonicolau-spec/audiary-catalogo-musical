@@ -1,0 +1,47 @@
+# PRD: Audiary — Plataforma de Catalogação e Diário Musical
+
+## 1. Visão Geral e Contexto
+* **Produto:** Audiary
+* **Slogan:** "Keep track of what you hear"
+* **Status:** Pronto para Desenvolvimento (MVP)
+* **Contexto:** Diferente dos serviços de streaming focados em reprodução passiva, o Audiary foca na relação do usuário com a música como obra de arte. É um diário musical digital inspirado no modelo do Letterboxd.
+
+## 2. Objetivos do Negócio e do Usuário
+* Criar um espaço centralizado para registrar o histórico de audição (álbuns e músicas).
+* Permitir a expressão crítica por meio de notas, resenhas e avaliações.
+* Construir uma biblioteca musical baseada na memória afetiva e na descoberta de novos artistas.
+
+## 3. Personas
+* **O Crítico Amador:** Ouve álbuns inteiros, analisa encartes, letras e quer um lugar focado em texto para registrar suas resenhas e dar notas de 1 a 5 estrelas.
+* **O Colecionador de Memórias:** Quer ver visualmente tudo o que ouviu ao longo do tempo, organizando sua biblioteca pessoal de forma estética.
+
+## 4. Escopo do MVP (Requisitos Funcionais)
+Priorizados usando a metodologia MoSCoW:
+
+### Must Have (Obrigatório no MVP)
+* [ ] **RF01 - Busca Musical:** Pesquisa de artistas, álbuns e gêneros consumindo uma API pública de música.
+* [ ] **RF02 - Registro de Audição (Log):** Botão para marcar um álbum como "ouvido", selecionar a data em que foi escutado e atribuir uma nota (1-5 estrelas).
+* [ ] **RF03 - Resenhas (Reviews):** Campo de texto para o usuário escrever sua opinião crítica sobre a obra escutada.
+* [ ] **RF04 - Perfil e Biblioteca Pessoal:** Tela exibindo o diário do usuário com os álbuns recentemente ouvidos, notas e resenhas históricas.
+
+### Should Have (Muito Importante)
+* [ ] **RF05 - Sistema de Favoritos:** Marcar álbuns favoritos (ícone de coração) para exibição em destaque no perfil.
+* [ ] **RF06 - Lista de Desejos (Listenlist):** Salvar álbuns que deseja descobrir ou ouvir no futuro.
+
+### Could Have (Desejável)
+* [ ] **RF07 - Filtros de Busca:** Filtrar resultados por ano de lançamento ou gênero musical principal.
+
+### Won't Have (Fora de Escopo do MVP)
+* [ ] Player integrado para reprodução de áudio.
+* [ ] Importação automática de dados retroativos do Spotify/Apple Music.
+
+## 5. Requisitos Não-Funcionais (Qualidade e Técnica)
+* **Interface Responsiva:** O design deve ser adaptável e fluido tanto para dispositivos móveis quanto desktops.
+* **Validação de Formulários:** Impedir o envio de resenhas vazias ou notas inválidas com feedbacks visuais claros.
+* **Persistência Híbrida:** Armazenamento estruturado usando uma API fake local combinada com persistência de sessão.
+
+## 6. Métricas de Sucesso
+* Média de álbuns catalogados por usuário ativo na plataforma.
+* Engajamento na escrita de resenhas de texto.
+*
+

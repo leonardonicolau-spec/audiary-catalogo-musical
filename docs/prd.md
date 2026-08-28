@@ -26,51 +26,33 @@ O sistema tem como objetivo funcionar como um diário musical digital, permitind
 
 ## 4. Atores do Sistema
 
-### Visitante
-Pessoa que acessa a aplicação sem possuir uma conta. Pode pesquisar e visualizar informações sobre artistas e álbuns disponíveis na plataforma.
+- **Visitante (Não Autenticado):** Pessoa que acessa a plataforma para explorar o catálogo, pesquisar artistas/álbuns e visualizar a landing page.
+- **Membro (Usuário Autenticado):** Ouvinte que possui perfil na aplicação e interage ativamente salvando avaliações, escrevendo resenhas, marcando favoritos e gerenciando sua biblioteca pessoal e *Listenlist*.
 
-### Usuário
-Pessoa autenticada que pode registrar álbuns como ouvidos, atribuir notas, escrever resenhas, favoritar álbuns, manter sua biblioteca e criar uma lista de álbuns que deseja ouvir.
+## 5. Histórias de Usuário (User Stories)
 
-### API Pública
-Serviço externo responsável por fornecer informações musicais, como artistas, álbuns, capas, gêneros e datas de lançamento.
+### 📌 Épico 1: Exploração e Busca (RA1, RA4, RA5)
 
-### API Fake
-Serviço utilizado pela aplicação para persistir e consultar dados gerados pelos usuários, como registros de audição, avaliações, resenhas e listas.
+- **US01:** Como **Visitante**, eu quero pesquisar por artistas e álbuns na barra de busca, para que eu possa encontrar informações detalhadas, capas e dados reais de obras musicais.
+- **US02:** Como **Visitante**, eu quero navegar por uma interface responsiva e adaptada para dispositivos móveis ou desktop, para que eu possa consultar o catálogo confortavelmente em qualquer tela.
+- **US03:** Como **Membro**, eu quero visualizar os detalhes de um álbum em um modal/card interativo, para que eu possa ler informações de faixa, gênero e ano de lançamento.
 
-## 5. Histórias de Usuário
+### 📌 Épico 2: Diário Musical e Registros (RA2, RA4, RA5)
 
-### 5.1 Descoberta Musical
+- **US04:** Como **Membro**, eu quero registrar um álbum como "ouvido" informando a data da audição, para que eu possa manter um histórico cronológico do meu diário musical.
+- **US05:** Como **Membro**, eu quero atribuir uma nota de 1 a 5 estrelas a um álbum, para que eu possa classificar minhas experiências musicais.
+- **US06:** Como **Membro**, eu quero escrever, editar e excluir resenhas sobre um álbum, para que eu possa registrar minhas opiniões pessoais sobre a obra.
 
-- **HU01:** Como visitante, quero pesquisar artistas e álbuns para descobrir novos conteúdos musicais.
-- **HU02:** Como visitante, quero visualizar informações de um álbum para conhecer seu artista, gênero, data de lançamento e faixas.
-- **HU03:** Como visitante, quero filtrar resultados por gênero ou ano de lançamento para encontrar álbuns de acordo com meus interesses.
+### 📌 Épico 3: Organização da Biblioteca e Listas (RA2, RA5)
 
-### 5.2 Registro de Audição
+- **US07:** Como **Membro**, eu quero salvar álbuns na minha *Listenlist* (lista de desejos), para que eu me lembre de ouvi-los no futuro.
+- **US08:** Como **Membro**, eu quero marcar álbuns como "Favoritos", para que eu possa ter acesso rápido às minhas obras preferidas no meu perfil.
+- **US09:** Como **Membro**, eu quero filtrar os álbuns da minha biblioteca por gênero e ano de lançamento, para que eu encontre registros específicos com facilidade.
 
-- **HU04:** Como usuário, quero registrar um álbum como ouvido, informando a data em que o escutei, para manter um histórico das minhas experiências musicais.
-- **HU05:** Como usuário, quero atribuir uma nota de 1 a 5 estrelas a um álbum, para registrar minha opinião sobre a obra.
-- **HU06:** Como usuário, quero visualizar meu histórico de álbuns ouvidos, para acompanhar minha trajetória musical.
+### 📌 Épico 4: Perfil e Preferências (RA1, RA2)
 
-### 5.3 Resenhas
-
-- **HU07:** Como usuário, quero escrever uma resenha sobre um álbum que ouvi, para registrar minhas impressões sobre a obra.
-- **HU08:** Como usuário, quero editar ou excluir minhas resenhas, para manter minhas opiniões atualizadas.
-
-### 5.4 Biblioteca Pessoal
-
-- **HU09:** Como usuário, quero adicionar um álbum à minha biblioteca, para organizar as obras que já ouvi.
-- **HU10:** Como usuário, quero remover um álbum da minha biblioteca, para manter minha coleção organizada.
-- **HU11:** Como usuário, quero marcar álbuns como favoritos, para acessar rapidamente as obras que mais gosto.
-
-### 5.5 Lista de Desejos
-
-- **HU12:** Como usuário, quero adicionar álbuns à minha Listenlist, para registrar obras que desejo ouvir futuramente.
-- **HU13:** Como usuário, quero remover álbuns da minha Listenlist, para manter minha lista atualizada.
-
-### 5.6 Perfil
-
-- **HU14:** Como usuário, quero visualizar meu perfil com meus álbuns ouvidos, avaliações, resenhas e favoritos, para acompanhar minha atividade musical.
+- **US10:** Como **Membro**, eu quero visualizar minha página de perfil com o resumo de todas as minhas estatísticas, resenhas e biblioteca, para que eu acompanhe minha trajetória musical.
+- **US11:** Como **Membro**, eu quero que minhas preferências de interface e dados de sessão fiquem salvos localmente, para que a aplicação lembre das minhas escolhas ao retornar.
 
 ## 6. Escopo do MVP
 

@@ -17,7 +17,7 @@ graph TD
     Client -->|Preferências e sessão| LocalStorage[(LocalStorage)]
 ```
 
-### Componentes principais
+**Componentes principais**
 
 - **Interface Web:** responsável pela apresentação das páginas e interação com o usuário.
 - **API Pública de Música:** fornece informações como artistas, álbuns, capas, gêneros e faixas.
@@ -31,7 +31,7 @@ graph TD
 - **Bootstrap:** framework CSS utilizado para componentes e layouts responsivos.
 - **Sass/SCSS:** organização e modularização dos estilos.
 - **JavaScript:** lógica e interatividade da aplicação.
-- **jQuery:** manipulação do DOM e implementação de interações.
+- **jQuery & Plugins:** manipulação do DOM e aplicação de máscaras em formulários (jQuery Mask Plugin).
 - **Node.js e NPM:** gerenciamento de dependências e ferramentas do projeto.
 - **JSON Server:** API fake para persistência e consulta dos dados.
 - **ESLint:** análise estática e padronização do código JavaScript.
@@ -73,7 +73,7 @@ erDiagram
         string id PK
         string usuario_id FK
         string album_id FK
-        date data_audicao
+        string data_audicao
         int nota
         boolean favorito
     }
@@ -83,32 +83,37 @@ erDiagram
         string usuario_id FK
         string album_id FK
         string texto
-        datetime data_criacao
+        string data_criacao
     }
 
     LISTA_DESEJOS {
         string id PK
         string usuario_id FK
         string album_id FK
-        datetime data_adicao
+        string data_adicao
     }
 ```
 
 ### Descrição das Entidades
 
 **USUARIO**
+
 Representa os usuários da aplicação e armazena suas informações básicas de identificação.
 
 **ALBUM**
+
 Representa os álbuns catalogados pela aplicação. Os dados musicais poderão ser obtidos inicialmente por meio da API pública.
 
 **REGISTRO_AUDICAO**
+
 Representa o registro de um álbum ouvido pelo usuário, armazenando a data da audição, a avaliação e a informação de favorito.
 
 **RESENHA**
+
 Representa uma avaliação textual realizada pelo usuário sobre um álbum.
 
 **LISTA_DESEJOS**
+
 Representa os álbuns que o usuário deseja ouvir futuramente.
 
 ## 5. Persistência de Dados
@@ -127,7 +132,7 @@ O JSON Server será responsável pela persistência de dados relacionados à ati
 
 ### LocalStorage
 
-O `localStorage` será utilizado para armazenar informações que precisam permanecer disponíveis no navegador, como preferências da interface e informações relacionadas à sessão.
+O localStorage será utilizado para armazenar informações que precisam permanecer disponíveis no navegador, como preferências da interface e informações relacionadas à sessão.
 
 ### API Pública
 

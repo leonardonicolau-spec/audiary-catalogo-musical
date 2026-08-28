@@ -103,7 +103,7 @@ npm start
 
 ## 📖 Checklist | Indicadores de Desempenho (ID)
 
-**Link:** [Checklist de IDs](checklist-IDs.md)
+**Link:** [Checklist de IDs](docs/checklist-IDs.md)
 
 ## 🙅 Fora do escopo (por enquanto)
 

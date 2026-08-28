@@ -34,7 +34,7 @@ O objetivo é funcionar como um diário musical digital: um espaço onde você r
 |---|---|
 | **Front-end** | HTML5, CSS3, Sass/SCSS, Bootstrap, JavaScript, jQuery |
 | **Persistência de dados** | JSON Server (API fake) + LocalStorage |
-| **Dados musicais** | MusicBraiz/Last.fm API |
+| **Dados musicais** | MusicBrainz/Last.fm API |
 | **Ferramentas** | Node.js, NPM, ESLint, Prettier, Git/GitHub |
 
 ## 🏗️ Arquitetura

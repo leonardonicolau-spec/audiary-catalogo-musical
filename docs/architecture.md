@@ -1,6 +1,6 @@
-Arquitetura de Software: Audiary
+# Arquitetura de Software: Audiary
 
-1. Contexto Técnico
+## 1. Contexto Técnico
 
 O Audiary será desenvolvido como uma aplicação web responsiva voltada à catalogação e ao registro de experiências musicais.
 
@@ -8,39 +8,42 @@ A aplicação utilizará tecnologias de desenvolvimento front-end, uma API públ
 
 O armazenamento local do navegador também será utilizado para manter determinadas preferências e informações da sessão do usuário.
 
-2. Arquitetura do Sistema
+## 2. Arquitetura do Sistema
 
+```mermaid
 graph TD
     Client[Interface Web: Audiary] -->|Consulta dados musicais| MusicAPI[API Pública de Música]
     Client -->|Persistência de dados| FakeAPI[JSON Server]
     Client -->|Preferências e sessão| LocalStorage[(LocalStorage)]
+```
 
-Componentes principais
+### Componentes principais
 
-- Interface Web: responsável pela apresentação das páginas e interação com o usuário.
-- API Pública de Música: fornece informações como artistas, álbuns, capas, gêneros e faixas.
-- JSON Server: simula uma API de backend para persistência dos dados do usuário.
-- LocalStorage: armazena informações locais, como preferências e dados de sessão.
+- **Interface Web:** responsável pela apresentação das páginas e interação com o usuário.
+- **API Pública de Música:** fornece informações como artistas, álbuns, capas, gêneros e faixas.
+- **JSON Server:** simula uma API de backend para persistência dos dados do usuário.
+- **LocalStorage:** armazena informações locais, como preferências e dados de sessão.
 
-3. Pilha Tecnológica
+## 3. Pilha Tecnológica
 
-- HTML5: estrutura das páginas.
-- CSS3: estilização e layouts personalizados.
-- Bootstrap: framework CSS utilizado para componentes e layouts responsivos.
-- Sass/SCSS: organização e modularização dos estilos.
-- JavaScript: lógica e interatividade da aplicação.
-- jQuery: manipulação do DOM e implementação de interações.
-- Node.js e NPM: gerenciamento de dependências e ferramentas do projeto.
-- JSON Server: API fake para persistência e consulta dos dados.
-- ESLint: análise estática e padronização do código JavaScript.
-- Prettier: formatação automática do código.
-- Git/GitHub: versionamento e gerenciamento do código-fonte.
-- API Pública de Música: fornecimento de informações sobre artistas e álbuns.
+- **HTML5:** estrutura das páginas.
+- **CSS3:** estilização e layouts personalizados.
+- **Bootstrap:** framework CSS utilizado para componentes e layouts responsivos.
+- **Sass/SCSS:** organização e modularização dos estilos.
+- **JavaScript:** lógica e interatividade da aplicação.
+- **jQuery:** manipulação do DOM e implementação de interações.
+- **Node.js e NPM:** gerenciamento de dependências e ferramentas do projeto.
+- **JSON Server:** API fake para persistência e consulta dos dados.
+- **ESLint:** análise estática e padronização do código JavaScript.
+- **Prettier:** formatação automática do código.
+- **Git/GitHub:** versionamento e gerenciamento do código-fonte.
+- **API Pública de Música:** fornecimento de informações sobre artistas e álbuns.
 
-4. Modelo de Dados
+## 4. Modelo de Dados
 
 O Audiary utilizará uma estrutura de dados baseada nas principais entidades necessárias para o funcionamento da aplicação.
 
+```mermaid
 erDiagram
 
     USUARIO ||--o{ REGISTRO_AUDICAO : possui
@@ -89,34 +92,30 @@ erDiagram
         string album_id FK
         datetime data_adicao
     }
+```
 
-Descrição das Entidades
+### Descrição das Entidades
 
-USUARIO
-
+**USUARIO**
 Representa os usuários da aplicação e armazena suas informações básicas de identificação.
 
-ALBUM
-
+**ALBUM**
 Representa os álbuns catalogados pela aplicação. Os dados musicais poderão ser obtidos inicialmente por meio da API pública.
 
-REGISTRO_AUDICAO
-
+**REGISTRO_AUDICAO**
 Representa o registro de um álbum ouvido pelo usuário, armazenando a data da audição, a avaliação e a informação de favorito.
 
-RESENHA
-
+**RESENHA**
 Representa uma avaliação textual realizada pelo usuário sobre um álbum.
 
-LISTA_DESEJOS
-
+**LISTA_DESEJOS**
 Representa os álbuns que o usuário deseja ouvir futuramente.
 
-5. Persistência de Dados
+## 5. Persistência de Dados
 
 Os dados serão divididos entre diferentes mecanismos de armazenamento de acordo com sua finalidade.
 
-API Fake
+### API Fake
 
 O JSON Server será responsável pela persistência de dados relacionados à atividade do usuário, como:
 
@@ -126,15 +125,15 @@ O JSON Server será responsável pela persistência de dados relacionados à ati
 - Lista de desejos;
 - Dados básicos de usuários.
 
-LocalStorage
+### LocalStorage
 
-O "localStorage" será utilizado para armazenar informações que precisam permanecer disponíveis no navegador, como preferências da interface e informações relacionadas à sessão.
+O `localStorage` será utilizado para armazenar informações que precisam permanecer disponíveis no navegador, como preferências da interface e informações relacionadas à sessão.
 
-API Pública
+### API Pública
 
 Informações como nome do álbum, artista, capa, gênero, data de lançamento e faixas serão obtidas dinamicamente por meio de uma API pública de música.
 
-6. Fluxo de Integração com a API Pública
+## 6. Fluxo de Integração com a API Pública
 
 1. O usuário pesquisa um artista ou álbum na aplicação.
 2. O front-end realiza uma requisição assíncrona para a API pública.
